@@ -1,103 +1,266 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { motion } from "framer-motion";
+import { Building2, KeyRound, ShieldCheck, Users, Zap } from "lucide-react";
+import Nav from "@/components/Nav";
+import Section from "@/components/Section";
+import Footer from "@/components/Footer";
+
+export default function Page() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+      <>
+        <Nav />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+        {/* HERO */}
+        <main className="container-max pt-16 sm:pt-24">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+            <div>
+            <span className="badge mb-5">
+              <Zap className="h-4 w-4" /> Smart Access, Real Peace of Mind
+            </span>
+              <h1 className="text-4xl sm:text-5xl font-semibold leading-tight tracking-tight">
+                Building Management,
+                <br />
+                <span className="text-accent">simple</span>, secure, and{" "}
+                <span className="text-accent2">delightful</span>.
+              </h1>
+              <p className="mt-6 text-slate-300 max-w-xl">
+                Ritzy unifies door control, resident credentials, visitor passes, and logs in
+                a single, modern platform. Operate from anywhere, with confidence.
+              </p>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a href="#contact" className="btn btn-primary">Book a demo</a>
+                <a href="#features" className="btn btn-ghost">See how it works</a>
+              </div>
+
+              <div className="mt-10 grid grid-cols-3 gap-6 text-center">
+                <Stat label="Doors online" value="1,240" />
+                <Stat label="Residents served" value="18k+" />
+                <Stat label="Avg. unlock time" value="120ms" />
+              </div>
+            </div>
+
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="card p-4 lg:p-6"
+            >
+              {/* Palette-matching mock */}
+              <div className="border border-border rounded-xl overflow-hidden">
+                <div className="bg-panel px-4 py-3 border-b border-border flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="h-9 w-9 rounded-lg bg-accent/20 border border-accent/30 grid place-items-center">
+                      <Building2 className="h-4 w-4 text-accent" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-slate-300">The Dakota</p>
+                      <p className="text-xs text-slate-400">123 Main St, New York</p>
+                    </div>
+                  </div>
+                  <span className="badge">America/New_York</span>
+                </div>
+
+                <div className="grid sm:grid-cols-4 gap-4 p-4">
+                  <Tile icon={<KeyRound className="h-4 w-4" />} label="Doors" value="1" />
+                  <Tile icon={<Users className="h-4 w-4" />} label="Residents" value="11" />
+                  <Tile icon={<Building2 className="h-4 w-4" />} label="Vacant Apts" value="4" />
+                  <Tile icon={<ShieldCheck className="h-4 w-4" />} label="Accesses" value="5" />
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </main>
+
+        {/* FEATURES */}
+        <Section id="features" title="Everything you need, nothing you don’t" kicker="Capabilities">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Feature
+                icon={<KeyRound className="h-5 w-5 text-accent" />}
+                title="Instant mobile keys"
+                text="Issue, revoke, and time-limit credentials in a click. No plastic, no headaches."
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <Feature
+                icon={<ShieldCheck className="h-5 w-5 text-accent" />}
+                title="Audit-grade security"
+                text="Tamper-proof logs, SSO for staff, and fine-grained roles out of the box."
+            />
+            <Feature
+                icon={<Users className="h-5 w-5 text-accent" />}
+                title="Resident & visitor passes"
+                text="Beautiful resident app and QR visitor links with auto-expiration."
+            />
+            <Feature
+                icon={<Building2 className="h-5 w-5 text-accent" />}
+                title="Portfolio view"
+                text="Multi-building dashboards, health checks, and alerts in real time."
+            />
+            <Feature
+                icon={<Zap className="h-5 w-5 text-accent" />}
+                title="Fast & reliable"
+                text="Sub-200ms unlocks with edge caching and resilient websockets."
+            />
+            <Feature
+                icon={<KeyRound className="h-5 w-5 text-accent" />}
+                title="Easy integrations"
+                text="Webhooks & APIs to connect CRMs, intercoms, and your ops tools."
+            />
+          </div>
+        </Section>
+
+        {/* PRICING */}
+        <Section id="pricing" title="Simple pricing that scales" kicker="Pricing">
+          <div className="grid md:grid-cols-3 gap-6">
+            <Pricing
+                name="Starter"
+                price="$49"
+                period="/building/mo"
+                items={["Up to 2 doors", "Unlimited residents", "Email support"]}
+                cta="Start free"
+            />
+            <Pricing
+                name="Growth"
+                highlight
+                price="$149"
+                period="/building/mo"
+                items={["Up to 10 doors", "Visitor links", "Priority support"]}
+                cta="Talk to sales"
+            />
+            <Pricing
+                name="Enterprise"
+                price="Custom"
+                period=""
+                items={["Unlimited doors", "SSO & SAML", "SLA & Onboarding"]}
+                cta="Contact us"
+            />
+          </div>
+        </Section>
+
+        {/* CONTACT / CTA */}
+        <Section id="contact" title="Ready to modernize your access?">
+          <div className="card p-6 sm:p-8">
+            <form
+                className="grid sm:grid-cols-3 gap-4"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  alert("Thanks! We'll get back to you shortly.");
+                }}
+            >
+              <input
+                  className="w-full rounded-xl bg-panel border border-border px-4 py-3 outline-none focus:ring-2 focus:ring-accent/50"
+                  placeholder="Your name"
+                  required
+              />
+              <input
+                  type="email"
+                  className="w-full rounded-xl bg-panel border border-border px-4 py-3 outline-none focus:ring-2 focus:ring-accent/50"
+                  placeholder="Work email"
+                  required
+              />
+              <button className="btn btn-primary w-full" type="submit">
+                Request demo
+              </button>
+            </form>
+          </div>
+        </Section>
+
+        {/* FAQ */}
+        <Section id="faq" title="Frequently asked questions">
+          <div className="grid sm:grid-cols-2 gap-6">
+            <FAQ q="Does Ritzy work with our existing doors?" a="Yes — we integrate with most modern relays and readers. If you're unsure, we’ll check your hardware during onboarding." />
+            <FAQ q="Is there a resident app?" a="Yep. iOS/Android for mobile unlocks, digital keys, and visitor passes." />
+            <FAQ q="How fast are unlocks?" a="Typical latency is 80–200ms depending on network conditions." />
+            <FAQ q="Do you offer SSO?" a="SAML/SSO is available on the Enterprise plan." />
+          </div>
+        </Section>
+
+        <Footer />
+      </>
+  );
+}
+
+function Tile({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
+  return (
+      <div className="rounded-xl border border-border bg-panel p-4">
+        <div className="flex items-center gap-3 text-slate-300">
+        <span className="h-9 w-9 rounded-lg bg-accent/15 border border-accent/30 grid place-items-center text-accent">
+          {icon}
+        </span>
+          <div>
+            <p className="text-xs text-slate-400">{label}</p>
+            <p className="text-lg font-semibold">{value}</p>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+  );
+}
+
+function Feature({ icon, title, text }: { icon: React.ReactNode; title: string; text: string }) {
+  return (
+      <div className="card p-5">
+        <div className="flex items-center gap-3 mb-3">
+        <span className="h-9 w-9 rounded-lg bg-accent/15 border border-accent/30 grid place-items-center text-accent">
+          {icon}
+        </span>
+          <h3 className="font-semibold">{title}</h3>
+        </div>
+        <p className="text-slate-300">{text}</p>
+      </div>
+  );
+}
+
+function Pricing({
+                   name,
+                   price,
+                   period,
+                   items,
+                   cta,
+                   highlight
+                 }: {
+  name: string;
+  price: string;
+  period: string;
+  items: string[];
+  cta: string;
+  highlight?: boolean;
+}) {
+  return (
+      <div className={`card p-6 relative ${highlight ? "outline outline-2 outline-accent/40" : ""}`}>
+        {highlight && <span className="absolute -top-3 left-6 badge">Most popular</span>}
+        <h3 className="text-xl font-semibold">{name}</h3>
+        <div className="mt-2">
+          <span className="text-4xl font-bold">{price}</span>
+          <span className="text-slate-400">{period}</span>
+        </div>
+        <ul className="mt-6 space-y-2 text-slate-300">
+          {items.map((it) => (
+              <li key={it} className="flex items-center gap-2">
+                <span className="h-2 w-2 bg-accent rounded-full" />
+                {it}
+              </li>
+          ))}
+        </ul>
+        <a href="#contact" className="btn btn-ghost mt-6">{cta}</a>
+      </div>
+  );
+}
+
+function Stat({ label, value }: { label: string; value: string }) {
+  return (
+      <div className="text-left">
+        <div className="text-2xl font-semibold">{value}</div>
+        <div className="text-xs text-slate-400 mt-1">{label}</div>
+      </div>
+  );
+}
+
+function FAQ({ q, a }: { q: string; a: string }) {
+  return (
+      <div className="card p-5">
+        <h4 className="font-semibold mb-2">{q}</h4>
+        <p className="text-slate-300">{a}</p>
+      </div>
   );
 }
